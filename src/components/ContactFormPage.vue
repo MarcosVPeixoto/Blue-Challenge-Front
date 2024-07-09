@@ -11,9 +11,9 @@
         <input type="email" id="email" v-model="formData.email" class="input" required>
       </div>
       <div class="form-group">
-        <label for="phone" class="label">Telefone:</label>
-        <input type="tel" id="phone" v-model="formData.phone" class="input" required>
-      </div>
+    <label for="phone" class="label">Telefone:</label>
+    <input type="tel" id="phone" v-model="formData.phone" class="input" required @input="validatePhone"/>
+  </div>
       <button type="submit"> Cadastrar</button>
     </form>
   </div>
@@ -42,8 +42,11 @@ export default {
         .then(() => {
           this.$router.push('/contacts');          
         })
-        .catch(error => console.log(error))
-      
+        .catch(error => console.log(error))      
+    },
+    validatePhone(event) {      
+      const numericInput = event.target.value.replace(/\D/g, '');      
+      this.formData.phone = numericInput;
     }
   }
 };
